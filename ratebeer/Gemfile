@@ -46,6 +46,7 @@ group :development, :test do
 end
 
 group :development, :test do
+  gem 'better_errors'
   gem 'sqlite3'
 end
 
