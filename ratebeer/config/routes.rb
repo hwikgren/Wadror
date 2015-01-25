@@ -2,16 +2,16 @@ Rails.application.routes.draw do
 
   root 'breweries#index'
 
-#  get 'ratings', to: 'ratings#index'
-#  get 'ratings/new', to: 'ratings#new'
-#  post 'ratings', to: 'ratings#create'
   get 'signup', to: 'users#new'
+  get 'signin', to: 'sessions#new'
+  delete 'signout', to: 'sessions#destroy'
+
   resources :ratings, only: [:index, :new, :create, :destroy]
   resources :beers
   resources :breweries
   resources :users
   resource :session, only: [:new, :create, :destroy]
-#  get 'session/new', to: 'sessions#new'
+
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
@@ -53,7 +53,6 @@ Rails.application.routes.draw do
   #       get 'recent', on: :collection
   #     end
   #   end
-
   # Example resource route with concerns:
   #   concern :toggleable do
   #     post 'toggle'
