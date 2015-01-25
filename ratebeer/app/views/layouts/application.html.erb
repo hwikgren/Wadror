@@ -11,8 +11,11 @@
     <%= link_to 'Breweries', breweries_path %>
     <%= link_to 'Beers', beers_path %>
     <%= link_to 'Ratings', ratings_path %>
+    <% unless session[:user_id].nil? %>
+      <p><%= User.find(session[:user_id]).username %> signed in</p>
+    <% end %>
   </div>
-
+  
   <%= yield %>
 
 </body>
