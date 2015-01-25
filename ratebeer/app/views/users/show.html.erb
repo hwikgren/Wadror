@@ -1,9 +1,21 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Username:</strong>
+<h2>
   <%= @user.username %>
+</h2>
+
+<p>
+  has made <%= pluralize(@user.ratings.count, 'rating', 'ratings') %>
 </p>
 
+<% unless @user.ratings.count == 0 %>
+  The ratings have the average <%= @user.average_rating %> </br></br>
+  <strong>Ratings</strong></br>
+  <% @user.ratings.each do |rating| %>
+    <li> <%= rating.to_s %> <%= link_to 'delete', rating, method: :delete, data: { confirm: 'Are you sure?' } %> </li>
+  <% end %>
+<% end %>
+
+</br>
 <%= link_to 'Edit', edit_user_path(@user) %> |
 <%= link_to 'Back', users_path %>
