@@ -11,11 +11,20 @@
 <% unless @user.ratings.count == 0 %>
   The ratings have the average <%= @user.average_rating %> </br></br>
   <strong>Ratings</strong></br>
+  <ul>
   <% @user.ratings.each do |rating| %>
-    <li> <%= rating.to_s %> <%= link_to 'delete', rating, method: :delete, data: { confirm: 'Are you sure?' } %> </li>
+    <li> 
+      <%= rating.to_s %> 
+      <% if @user == current_user %>
+        <%= link_to 'delete', rating, method: :delete, data: { confirm: 'Are you sure?' } %> 
+      <% end %>
+    </li>
   <% end %>
+  </ul>
 <% end %>
 
 </br>
-<%= link_to 'Edit', edit_user_path(@user) %> |
-<%= link_to 'Back', users_path %>
+<% if @user == current_user %>
+  <%= link_to 'Edit', edit_user_path(@user) %> |
+  <%= link_to 'Destroy', @user, method: :delete, data: { confirm: 'Are you sure? This will erase your username from the database!' } %>
+<% end %>
