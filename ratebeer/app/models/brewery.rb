@@ -2,7 +2,7 @@ class Brewery < ActiveRecord::Base
   include RatingAverage
 
   validates :name, presence: true
-  validates :year, numericality: { greater_than_or_equal_to: 1042, less_than_or_equal_to: 2015, only_integer: true }
+  validate :acceptable_year
 
   has_many :beers, dependent: :destroy
   has_many :ratings, through: :beers
@@ -18,5 +18,10 @@ class Brewery < ActiveRecord::Base
     puts "changed year to #{year}"
   end
 
+  def acceptable_year
+    unless year.present? && year >= 1042 && year <= Time.now.year
+      errors.add(:year, "has to be present and between 1042 and this year")
+    end
+  end
 end
 
