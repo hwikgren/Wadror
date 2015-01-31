@@ -6,6 +6,8 @@ class User < ActiveRecord::Base
     message: "has to contain at least one uppercase letter and one number" }
 
   has_secure_password
-  has_many :ratings
+  has_many :ratings, dependent: :destroy
   has_many :beers, through: :ratings
+  has_many :memberships, dependent: :destroy
+  has_many :beer_clubs, through: :memberships
 end

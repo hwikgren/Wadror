@@ -4,6 +4,17 @@
   <%= @user.username %>
 </h2>
 
+<% unless @user.beer_clubs.count == 0 %>
+  member of
+  <ul style="list-style: none;">
+    <% @user.beer_clubs.each do |club| %>
+      <li>
+        <%= link_to club.name, club %>
+      </li>
+    <% end %>
+  </ul>
+<% end %>
+  
 <p>
   has made <%= pluralize(@user.ratings.count, 'rating', 'ratings') %>
 </p>
@@ -11,7 +22,7 @@
 <% unless @user.ratings.count == 0 %>
   The ratings have the average <%= @user.average_rating %> </br></br>
   <strong>Ratings</strong></br>
-  <ul>
+  <ul style="list-style: none;">
   <% @user.ratings.each do |rating| %>
     <li> 
       <%= rating.to_s %> 
