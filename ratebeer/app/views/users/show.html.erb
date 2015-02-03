@@ -34,7 +34,16 @@
   </ul>
 <% end %>
 
-</br>
+<% unless @user.favorite_style.nil? %>
+  Favorite beer style is <%= @user.favorite_style %>.
+<% end %>
+
+</br></br>
+<% unless @user.favorite_brewery.nil? %>
+  Favorite brewery is <%= @user.favorite_brewery %>.
+<% end %>
+
+</br></br>
 <% if @user == current_user %>
   <%= link_to 'Edit', edit_user_path(@user) %> |
   <%= link_to 'Destroy', @user, method: :delete, data: { confirm: 'Are you sure? This will erase your username from the database!' } %>
