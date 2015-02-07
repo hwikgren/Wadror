@@ -1,0 +1,34 @@
+<p id="notice"><%= notice %></p>
+
+<h2>
+  <strong>Name:</strong>
+  <%= @brewery.name %>
+</h2>
+
+<p>
+  <i>Established in</strong>
+  <%= @brewery.year %></i>
+</p>
+
+<p>
+  Number of beers
+  <%= @brewery.beers.count %>
+</p>
+
+<p>
+  <% @brewery.beers.each do |beer| %>
+    <ul>
+      <%= link_to beer.name, beer %>
+    </ul>
+  <% end %>
+</p>
+
+<p>
+  Has <%= pluralize(@brewery.ratings.count, 'rating', 'ratings')%><% if @brewery.ratings.count > 0 %>, average <%= @brewery.average_rating %>
+  <% end %>
+</p>
+
+<%= link_to 'Edit', edit_brewery_path(@brewery) %> 
+<%#= link_to 'Back', breweries_path %>
+
+

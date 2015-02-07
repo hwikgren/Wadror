@@ -1,0 +1,16 @@
+<h2>List of ratings</h2>
+
+<p> Number of ratings
+  <%= @ratings.count %>
+</p>
+
+<p>
+  <ul>
+    <% @ratings.each do | rating| %>
+      <% user = User.find(rating.user_id) %>
+      <li> <%= rating.to_s %> <%= link_to user.username, user %> </li>
+    <% end %>
+  </ul>
+</p>
+
+<%#= link_to 'New rating', new_rating_path %>
