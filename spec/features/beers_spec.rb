@@ -1,6 +1,13 @@
 require 'rails_helper'
 
 describe "Beer" do
+  before :each do
+    user = FactoryGirl.create :user
+    visit signin_path      
+    fill_in('username', with:'Pekka')
+    fill_in('password', with:'Foobar1')
+    click_button('Log in')
+  end
 
   it "is created when given a valid name on page" do
     visit new_beer_path
