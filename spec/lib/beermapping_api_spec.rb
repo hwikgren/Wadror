@@ -122,4 +122,46 @@ describe "BeermappingApi" do
     place = places.last
     expect(place.status).to eq("Brewpub")
   end
+
+  # not sure these tests prove anything except that the method works both with cache.clear and with getting places twice
+  describe "with cache" do
+    it "in case of cache miss, new place is returned" do
+      Rails.cache.clear
+      canned_answer = get_answer
+      request(canned_answer)
+      places = get_places
+      check(places)
+    end
+
+    it "in case of cache hit, a cached place is returned" do
+      canned_answer = get_answer
+      request(canned_answer)
+      get_places
+      # get the cached places
+      places = get_places
+      check(places)
+    end
+  end
+end
+
+def get_answer
+  string = <<-END_OF_STRING
+<?xml version='1.0' encoding='utf-8' ?><bmp_locations><location><id>13307</id><name>O'Connell's Irish Bar</name><status>Beer Bar</status><reviewlink>http://beermapping.com/maps/reviews/reviews.php?locid=13307</reviewlink><proxylink>http://beermapping.com/maps/proxymaps.php?locid=13307&amp;d=5</proxylink><blogmap>http://beermapping.com/maps/blogproxy.php?locid=13307&amp;d=1&amp;type=norm</blogmap><street>Rautatienkatu 24</street><city>Tampere</city><state></state><zip>33100</zip><country>Finland</country><phone>35832227032</phone><overall>0</overall><imagecount>0</imagecount></location></bmp_locations>
+      END_OF_STRING
+  return string
+end
+
+def request(canned_answer)
+  stub_request(:get, /.*tampere/).to_return(body: canned_answer, headers: {'Content-Type' => "text/xml"})
+end
+
+def get_places
+  return BeermappingApi.places_in("tampere")
+end
+
+def check(places)
+  expect(places.size).to eq(1)
+  place = places.first
+  expect(place.name).to eq("O'Connell's Irish Bar")
+  expect(place.street).to eq("Rautatienkatu 24")      
 end
