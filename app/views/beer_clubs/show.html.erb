@@ -18,6 +18,18 @@
   </ul>
 
 <% if current_user %>
+  <% unless @beer_club.users.include?(current_user) %>
+    <%= form_for(@membership) do |f| %>
+      <%= f.hidden_field :beer_club_id %>
+      <%= f.submit value:"Join the club" %>
+    <% end %>
+  <% else %>
+    <%= form_for(@membership, method: "delete") do |f| %>
+      <%= f.hidden_field :beer_club_id %>
+      <%= f.submit value: "End the membership" %>
+    <% end %>
+  <% end %>
+<br />
   <%= link_to 'Edit', edit_beer_club_path(@beer_club) %> |
 <% end %>
 <%= link_to 'Back', beer_clubs_path %>
