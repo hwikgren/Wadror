@@ -18,13 +18,13 @@ b1 = Brewery.create name:"Koff", year:1897
 b2 = Brewery.create name:"Malmgard", year:2001
 b3 = Brewery.create name:"Weihenstephaner", year:1042
 
-beer1 = b1.beers.create name:"Iso 3", style_id:"s1.id"
-beer2 = b1.beers.create name:"Karhu", style_id:"s1.id"
-beer3 = b1.beers.create name:"Tuplahumala", style_id:"s1.id"
-beer4 = b2.beers.create name:"Huvila Pale Ale", style_id:"s2.id"
-beer5 = b2.beers.create name:"X Porter", style_id:"s3.id"
-beer6 = b3.beers.create name:"Hefezeizen", style_id:"s4.id"
-beer7 = b3.beers.create name:"Helles", style_id:"s1.id"
+beer1 = b1.beers.create name:"Iso 3", style_id:s1.id
+beer2 = b1.beers.create name:"Karhu", style_id:s1.id
+beer3 = b1.beers.create name:"Tuplahumala", style_id:s1.id
+beer4 = b2.beers.create name:"Huvila Pale Ale", style_id:s2.id
+beer5 = b2.beers.create name:"X Porter", style_id:s3.id
+beer6 = b3.beers.create name:"Hefezeizen", style_id:s4.id
+beer7 = b3.beers.create name:"Helles", style_id:s1.id
 
 u1 = User.create username:"Pekka", password:"Secret1", password_confirmation:"Secret1"
 u2 = User.create username:"Tommi", password:"Secret1", password_confirmation:"Secret1"
