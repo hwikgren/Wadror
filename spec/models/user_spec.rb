@@ -54,7 +54,7 @@ RSpec.describe User, :type => :model do
     it "without ratings does not have one" do
       expect(user.favorite_beer).to eq(nil)
     end
-    it "is the only rated one if only on rating" do
+    it "is the only rated one if only one rating" do
       beer = create_beer_with_rating(10, "lager", nil, user)
       expect(user.favorite_beer).to eq(beer)
     end
@@ -75,7 +75,7 @@ RSpec.describe User, :type => :model do
     end
     it "is the style of the only rated beer if only one rating" do
       beer = create_beer_with_rating(10, "lager", nil, user)
-      expect(user.favorite_style).to eq(beer.style)
+      expect(user.favorite_style).to eq("lager")
     end
     it "is the style with the highest average ratings" do
       create_beers_with_style_and_ratings("lager", 7, 9, user)
@@ -110,7 +110,8 @@ def create_beer_with_rating(score, style, brewery, user)
   if brewery == nil
     brewery = FactoryGirl.create(:brewery)
   end
-  beer = FactoryGirl.create(:beer, style:style, brewery_id:brewery.id)
+  styleObject = FactoryGirl.create(:style, name:style)
+  beer = FactoryGirl.create(:beer, style_id:styleObject.id, brewery_id:brewery.id)
   FactoryGirl.create(:rating, score:score, beer:beer, user:user)
   beer
 end

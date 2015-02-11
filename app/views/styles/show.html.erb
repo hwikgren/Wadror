@@ -1,0 +1,20 @@
+<p id="notice"><%= notice %></p>
+
+<h1>
+  <%= @style.name %>
+</h1>
+
+<p>
+  <%= @style.description %>
+</p>
+
+<h4>Beers</h4>
+<ul style="list-style-type:none">
+  <% @beers.each do |beer| %>
+    <li><%= link_to beer.name, beer %> by <%= link_to beer.brewery.name, beer.brewery %></li>
+  <% end %>
+</ul>
+<% if current_user %>
+  <%= link_to 'Edit', edit_style_path(@style) %> |
+<% end %>
+<%= link_to 'Back', styles_path %>

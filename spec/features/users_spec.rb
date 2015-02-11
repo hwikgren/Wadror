@@ -36,7 +36,7 @@ describe "User" do
 
   describe "who has rated beers" do
     let!(:brewery) { FactoryGirl.create :brewery, name:"Koff" }
-    let!(:beer1) { FactoryGirl.create :beer, style:"lager", brewery:brewery }
+    let!(:beer1) { FactoryGirl.create :beer, brewery:brewery }
     let!(:rating1) {FactoryGirl.create(:rating, beer:beer1, user:user) }
 
     it "his favorite style and brewery are shown on his page" do
@@ -46,8 +46,9 @@ describe "User" do
     end
 
     it "even if he has rated many beers" do
-      brewery2 = FactoryGirl.create :brewery 
-      beer2 = FactoryGirl.create :beer, style:"Weizen", brewery:brewery2
+      brewery2 = FactoryGirl.create :brewery
+      style2 = FactoryGirl.create :style, name:"Weizen" 
+      beer2 = FactoryGirl.create :beer, style:style2, brewery:brewery2
       FactoryGirl.create(:rating, score:20, beer:beer2, user:user) 
       visit user_path(user)
       expect(page).to have_content 'Favorite beer style is Weizen'
@@ -56,3 +57,4 @@ describe "User" do
   end
     
 end
+

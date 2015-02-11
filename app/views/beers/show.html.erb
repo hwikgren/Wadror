@@ -6,13 +6,13 @@
 
 <p>
   <strong>Style:</strong>
-  <%= @beer.style %>
+  <%= link_to @style.name, @style %>
 </p>
 
 <p>
   <strong>Brewery:</strong>
   <% brewery = Brewery.find @beer.brewery_id %>
-  <%= brewery.name %>
+  <%= link_to brewery.name, brewery %>
 </p>
 
 <p>

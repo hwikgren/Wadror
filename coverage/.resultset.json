@@ -33,6 +33,10 @@
         1,
         null
       ],
+      "/Users/hwikgren/Wadror/app/helpers/styles_helper.rb": [
+        1,
+        null
+      ],
       "/Users/hwikgren/Wadror/app/helpers/users_helper.rb": [
         1,
         null
@@ -44,6 +48,7 @@
         1,
         1,
         null,
+        1,
         1,
         1,
         1,
@@ -306,7 +311,7 @@
         null,
         1,
         23,
-        32,
+        37,
         null,
         null,
         1,
@@ -415,6 +420,11 @@
         null,
         null
       ],
+      "/Users/hwikgren/Wadror/app/models/style.rb": [
+        1,
+        1,
+        null
+      ],
       "/Users/hwikgren/Wadror/app/controllers/beers_controller.rb": [
         1,
         1,
@@ -430,6 +440,7 @@
         null,
         null,
         1,
+        0,
         0,
         0,
         null,
@@ -673,6 +684,6 @@
         null
       ]
     },
-    "timestamp": 1423576238
+    "timestamp": 1423665003
   }
 }

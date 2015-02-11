@@ -7,6 +7,7 @@ describe "Beer" do
     fill_in('username', with:'Pekka')
     fill_in('password', with:'Foobar1')
     click_button('Log in')
+    FactoryGirl.create :style
   end
 
   it "is created when given a valid name on page" do
