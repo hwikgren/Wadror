@@ -1,7 +1,6 @@
 <p id="notice"><%= notice %></p>
 
 <h2>
-  <strong>Name:</strong>
   <%= @brewery.name %>
 </h2>
 
@@ -10,18 +9,19 @@
   <%= @brewery.year %></i>
 </p>
 
+<br />
 <p>
-  Number of beers
+  Number of <strong>Beers</strong>
   <%= @brewery.beers.count %>
 </p>
 
-<p>
+<table class="table table-striped table-condensed">
   <% @brewery.beers.each do |beer| %>
-    <ul>
-      <%= link_to beer.name, beer %>
-    </ul>
+    <tr>
+      <td><%= link_to beer.name, beer %></td>
+    </tr>
   <% end %>
-</p>
+</table>
 <br />
 
 <p>

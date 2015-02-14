@@ -33,7 +33,7 @@
 <% unless @user.ratings.count == 0 %>
   The ratings have the average <%= @user.average_rating %> </br></br>
   <h4>Ratings</h4>
-  <table class="table table-hover">
+  <table class="table table-striped table-condensed">
     <thead>
       <th>Beer Score</th>
     </thead>
@@ -44,7 +44,7 @@
           <% if @user == current_user %>
             <td><%= link_to 'delete', rating, method: :delete, data: { confirm: 'Are you sure?' } %></td> 
           <% end %>
-        <tr>
+        </tr>
       <% end %>
     </tbody>
   </table>
