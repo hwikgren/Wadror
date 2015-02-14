@@ -12,6 +12,6 @@
   <% end %>
 
 Beer club <%= f.select :beer_club_id, options_from_collection_for_select(@beer_clubs, :id, :name) %>
-    <%= f.submit %>
+    <%= f.submit class:"btn-sm btn-primary" %>
 
 <% end %>

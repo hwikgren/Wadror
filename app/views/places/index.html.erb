@@ -4,14 +4,17 @@
 <br />
 <%= form_tag places_path do %>
   City <%= text_field_tag :city, params[:city] %>
-  <%= submit_tag 'Search' %>
+  <%= submit_tag 'Search', class:"btn-sm btn-primary" %>
 <% end %>
 
 <br /> 
 <% if @places %>
-  <ul>
+  <table class="table table-hover">
     <% @places.each do |place| %>
-      <li><%= link_to place.name, place_path(place.id) %></li>
+      <tr>
+        <td><%= link_to place.name, place_path(place.id) %></td>
+        <td>jotain</td>
+      </tr>
     <% end %>
-  </ul>
+  </table>
 <% end %>

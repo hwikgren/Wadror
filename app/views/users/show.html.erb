@@ -14,37 +14,44 @@
     <% end %>
   </ul>
 <% end %>
-  
+
+<% unless @user.favorite_style.nil? %>
+  </br>
+  Favorite beer style is <%= @user.favorite_style %>.
+<% end %>
+
+<% unless @user.favorite_brewery.nil? %>
+  </br></br>
+  Favorite brewery is <%= @user.favorite_brewery %>.
+<% end %>
+
+</br></br>  
 <p>
-  has made <%= pluralize(@user.ratings.count, 'rating', 'ratings') %>
+  Has made <%= pluralize(@user.ratings.count, 'rating', 'ratings') %>
 </p>
 
 <% unless @user.ratings.count == 0 %>
   The ratings have the average <%= @user.average_rating %> </br></br>
-  <strong>Ratings</strong></br>
-  <ul style="list-style: none;">
-  <% @user.ratings.each do |rating| %>
-    <li> 
-      <%= rating.to_s %> 
-      <% if @user == current_user %>
-        <%= link_to 'delete', rating, method: :delete, data: { confirm: 'Are you sure?' } %> 
+  <h4>Ratings</h4>
+  <table class="table table-hover">
+    <thead>
+      <th>Beer Score</th>
+    </thead>
+    <tbody>
+      <% @user.ratings.each do |rating| %>
+        <tr> 
+          <td><%= rating.to_s %></td> 
+          <% if @user == current_user %>
+            <td><%= link_to 'delete', rating, method: :delete, data: { confirm: 'Are you sure?' } %></td> 
+          <% end %>
+        <tr>
       <% end %>
-    </li>
-  <% end %>
-  </ul>
-<% end %>
-
-<% unless @user.favorite_style.nil? %>
-  Favorite beer style is <%= @user.favorite_style %>.
-<% end %>
-
-</br></br>
-<% unless @user.favorite_brewery.nil? %>
-  Favorite brewery is <%= @user.favorite_brewery %>.
+    </tbody>
+  </table>
 <% end %>
 
 </br></br>
 <% if @user == current_user %>
-  <%= link_to 'Edit', edit_user_path(@user) %> |
-  <%= link_to 'Destroy', @user, method: :delete, data: { confirm: 'Are you sure? This will erase your username from the database!' } %>
+  <%= link_to 'Edit', edit_user_path(@user), class:"btn-sm btn-primary" %>
+  <%= link_to 'Destroy', @user, method: :delete, data: { confirm: 'Are you sure? This will erase your username from the database!' }, class:"btn-sm btn-primary" %>
 <% end %>

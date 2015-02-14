@@ -9,12 +9,23 @@
 </p>
 
 <h4>Beers</h4>
-<ul style="list-style-type:none">
-  <% @beers.each do |beer| %>
-    <li><%= link_to beer.name, beer %> by <%= link_to beer.brewery.name, beer.brewery %></li>
-  <% end %>
-</ul>
+<table class:"table table-hover">
+  <thead>
+    <th>Name</th>
+    <th>Brewery</th>
+  </thead>
+  <tbody>
+    <% @beers.each do |beer| %>
+      <tr>
+        <td><%= link_to beer.name, beer %></td>
+        <td><%= link_to beer.brewery.name, beer.brewery %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<br /><br />
+
 <% if current_user %>
-  <%= link_to 'Edit', edit_style_path(@style) %> |
+  <%= link_to 'Edit', edit_style_path(@style), class:"btn-sm btn-primary" %>
 <% end %>
-<%= link_to 'Back', styles_path %>
+<%= link_to 'Back', styles_path, class:"btn-sm btn-primary" %>
