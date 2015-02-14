@@ -2,17 +2,26 @@
 
 <h1>Styles</h1>
 
-<ul style="list-style-type:none">
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th> Name</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
     <% @styles.each do |style| %>
-      <li>
-        <%= link_to style.name, style %>
+      <tr>
+        <td><%= link_to style.name, style %></td>
         <% if current_user %>
-          <%= link_to 'Edit', edit_style_path(style) %>
-          <%= link_to 'Destroy', style, method: :delete, data: { confirm: 'Are you sure?' } %>
+          <td><%= link_to 'Edit', edit_style_path(style) %></td>
+          <td><%= link_to 'Destroy', style, method: :delete, data: { confirm: 'Are you sure?' } %></td>
         <% end %>
-      </li>
+      </tr>
     <% end %>
-</ul>
+  </tbody>
+</table>
 
 <br>
 
