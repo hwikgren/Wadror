@@ -42,7 +42,7 @@ describe "Rating" do
       user2 = FactoryGirl.create(:user, username:'Jukka')
       FactoryGirl.create(:rating, beer:beer1, user:user2)
       visit user_path(user2)
-      expect(page).to have_content 'has made 1 rating'
+      expect(page).to have_content 'Has made 1 rating'
       expect(page).to have_content 'iso 3 10'
       expect(page).to have_no_content 'karhu 10'
     end

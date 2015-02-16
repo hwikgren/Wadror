@@ -26,4 +26,8 @@ class User < ActiveRecord::Base
     brewery_id = beers.group(:brewery_id).average(:score).max_by{ |k,v| v}[0]
     Brewery.find(brewery_id).name
   end
+
+  def self.top_raters(n)
+    Rating.group(:user_id).count.sort_by{ | k, v| v}.reverse.map{ |row| row[0] }.map{ |user| User.find(user) }
+  end
 end

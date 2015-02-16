@@ -4,6 +4,9 @@ class Brewery < ActiveRecord::Base
   validates :name, presence: true
   validate :acceptable_year
 
+  scope :active, -> { where active:true }
+  scope :retired, -> { where active:[nil, false] }
+
   has_many :beers, dependent: :destroy
   has_many :ratings, through: :beers
 
@@ -22,6 +25,10 @@ class Brewery < ActiveRecord::Base
     unless year.present? && year >= 1042 && year <= Time.now.year
       errors.add(:year, "has to be present and between 1042 and this year")
     end
+  end
+
+  def self.top_breweries(n)
+    Brewery.all.sort_by{ |b| -(b.average_rating) }.take(n)
   end
 end
 

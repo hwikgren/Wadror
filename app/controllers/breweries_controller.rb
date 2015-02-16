@@ -7,8 +7,12 @@ class BreweriesController < ApplicationController
   def index
     order = params[:order] || 'name'
     case order
-      when 'name' then @breweries = Brewery.order(:name)
-      when 'year' then @breweries = Brewery.order(:year)
+      when 'name' 
+        @active_breweries = Brewery.active.order(:name)
+        @retired_breweries = Brewery.retired.order(:name)
+      when 'year'
+        @active_breweries = Brewery.active.order(:year)
+        @retired_breweries = Brewery.retired.order(:year)
     end
   end
 
@@ -74,7 +78,7 @@ class BreweriesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def brewery_params
-      params.require(:brewery).permit(:name, :year)
+      params.require(:brewery).permit(:name, :year, :active)
     end
 
 end
