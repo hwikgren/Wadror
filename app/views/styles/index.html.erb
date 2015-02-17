@@ -14,10 +14,7 @@
     <% @styles.each do |style| %>
       <tr>
         <td><%= link_to style.name, style %></td>
-        <% if current_user %>
-          <td><%= link_to 'Edit', edit_style_path(style), class:"btn-sm btn-primary" %></td>
-          <td><%= link_to 'Destroy', style, method: :delete, data: { confirm: 'Are you sure?' }, class:"btn-sm btn-danger" %></td>
-        <% end %>
+        <td><%= edit_and_destroy_buttons(style) %></td>
       </tr>
     <% end %>
   </tbody>

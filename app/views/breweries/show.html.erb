@@ -28,7 +28,7 @@
 <br />
 
 <p>
-  Has <%= pluralize(@brewery.ratings.count, 'rating', 'ratings')%><% if @brewery.ratings.count > 0 %>, average <%= @brewery.average_rating %>
+  Has <%= pluralize(@brewery.ratings.count, 'rating', 'ratings')%><% if @brewery.ratings.count > 0 %>, average <%= round(@brewery.average_rating) %>
   <% end %>
 </p>
 <br />

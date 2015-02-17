@@ -23,9 +23,12 @@
     <% end %>
   </tbody>
 </table>
-<br /><br />
+<br />
+
+<p>Average rating of this style is <%= round(@style.average_rating) %></p>
+<br/>
 
 <% if current_user %>
-  <%= link_to 'Edit', edit_style_path(@style), class:"btn-sm btn-primary" %>
+  <%= link_to 'Edit', edit_beer_path(@style), class:"btn-sm btn-primary" %>
 <% end %>
 <%= link_to 'Back', styles_path, class:"btn-sm btn-primary" %>

@@ -31,7 +31,7 @@
 </p>
 
 <% unless @user.ratings.count == 0 %>
-  The ratings have the average <%= @user.average_rating %> </br></br>
+  The ratings have the average <%= round(@user.average_rating) %> </br></br>
   <h4>Ratings</h4>
   <table class="table table-striped table-condensed">
     <thead>
