@@ -11,14 +11,17 @@ Rails.application.routes.draw do
   get 'signup', to: 'users#new'
   get 'signin', to: 'sessions#new'
   delete 'signout', to: 'sessions#destroy'
-#  get 'places', to: 'places#index'
   post 'places', to:'places#search'
   get 'beerlist', to:'beers#list'
 
   resources :ratings, only: [:index, :new, :create, :destroy]
   resources :beers
-  resources :breweries
-  resources :users
+  resources :breweries do
+    post 'toggle_activity', on: :member
+  end
+  resources :users do
+    post 'ice_account', on: :member
+  end
   resource :session, only: [:new, :create, :destroy]
   resources :places, only: [:index, :show]
 

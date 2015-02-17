@@ -3,4 +3,7 @@
 <%= render 'form' %>
 
 <br />
+<% if current_user.admin %>
+  <%= link_to 'Delete', @brewery, method: :delete, notice:"Are you sure", class:"btn-sm btn-danger"%>
+<% end %>
 <%= link_to 'Back', @brewery, class:"btn-sm btn-primary" %>

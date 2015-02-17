@@ -5,7 +5,9 @@ class SessionsController < ApplicationController
 
   def create
     user = User.find_by username: params[:username]
-    if user && user.authenticate(params[:password])
+    if user.iced
+      redirect_to :back, notice:"Your account is frozen, please contact the admin!"
+    elsif user && user.authenticate(params[:password])
       session[:user_id] = user.id
       redirect_to user, notice: "Welcome back!"
     else

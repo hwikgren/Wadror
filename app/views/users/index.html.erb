@@ -6,6 +6,11 @@
     <% @users.each do |user| %>
       <tr>
         <td><%= link_to user.username, user %></td>
+        <% if current_user && current_user.admin && user.iced %>
+          <td><span class="badge">account frozen</span></td>
+        <% else %>
+          <td></td>
+        <% end %>
       </tr>
     <% end %>
 </table>

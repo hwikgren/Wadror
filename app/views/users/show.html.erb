@@ -2,6 +2,9 @@
 
 <h2>
   <%= @user.username %>
+  <% if current_user && current_user.admin && @user.iced %>
+    <span class="badge">account frozen</span>
+  <% end %>
 </h2>
 
 <% unless @user.beer_clubs.count == 0 %>
@@ -48,6 +51,14 @@
       <% end %>
     </tbody>
   </table>
+<% end %>
+
+<% if current_user && current_user.admin %>
+  <% unless @user.iced %>
+    <%= link_to 'freeze account', ice_account_user_path(@user.id), method: :post, class:"btn-sm btn-danger" %>
+  <% else %>
+    <%= link_to 'unfreeze account', ice_account_user_path(@user.id), method: :post, class:"btn-sm btn-danger" %>
+  <% end %>
 <% end %>
 
 </br></br>

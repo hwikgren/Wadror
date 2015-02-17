@@ -3,5 +3,6 @@
 <%= render 'form' %>
 
 <br />
+<%= link_to 'Delete', @beer_club, method: :delete, data: {confirm:'Are you sure?'}, class:"btn-sm btn-danger" if current_user.admin %>
 <%= link_to 'Back', @beer_club, class:"btn-sm btn-primary" %>
-<%#= link_to 'Back', beer_clubs_path %>
+

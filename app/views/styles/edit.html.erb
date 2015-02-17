@@ -3,4 +3,5 @@
 <%= render 'form' %>
 
 <br />
+<%= link_to 'Delete', @style, method: :delete, data: {confirm:'Are you sure?'}, class:"btn-sm btn-danger" if current_user.admin %>
 <%= link_to 'Back', @style, class:"btn-sm btn-primary" %>
