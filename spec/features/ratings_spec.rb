@@ -32,10 +32,9 @@ describe "Rating" do
       FactoryGirl.create(:rating, beer:beer1, user:user)
       FactoryGirl.create(:rating, beer:beer2, user:user)
     end
-    it "on ratings page with number of them" do
+    it "on ratings page" do
       visit ratings_path
-      expect(page).to have_content 'Number of ratings 2'
-      expect(page).to have_content 'karhu 10 Pekka'
+       expect(page).to have_content 'karhu 10 Pekka'
     end
 
     it "on a user's page only own ones" do
