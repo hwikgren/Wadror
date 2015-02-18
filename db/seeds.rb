@@ -14,9 +14,9 @@ s5 = Style.create name:"IPA", description:"The American IPA is a different soul 
 s6 = Style.create name:"Lowalcohol", description:"Low Alcohol Beer is also commonly known as Non Alcohol (NA) beer, which is a fallacy as all of these beers still contain small amounts of alcohol. Low Alcohol Beers are generally subjected to one of two things: a controlled brewing process that results in a low alcohol content, or the alcohol is removed using a reverse-osmosis method which passes alcohol through a permeable membrane. Very light on aroma, body, and flavor."
 
 
-b1 = Brewery.create name:"Koff", year:1897
-b2 = Brewery.create name:"Malmgard", year:2001
-b3 = Brewery.create name:"Weihenstephaner", year:1042
+b1 = Brewery.create name:"Koff", year:1897, active:true
+b2 = Brewery.create name:"Malmgard", year:2001, active:false
+b3 = Brewery.create name:"Weihenstephaner", year:1042, active:true
 
 beer1 = b1.beers.create name:"Iso 3", style_id:s1.id
 beer2 = b1.beers.create name:"Karhu", style_id:s1.id
