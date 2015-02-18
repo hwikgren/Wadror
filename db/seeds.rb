@@ -26,9 +26,9 @@ beer5 = b2.beers.create name:"X Porter", style_id:s3.id
 beer6 = b3.beers.create name:"Hefezeizen", style_id:s4.id
 beer7 = b3.beers.create name:"Helles", style_id:s1.id
 
-u1 = User.create username:"Pekka", password:"Secret1", password_confirmation:"Secret1"
-u2 = User.create username:"Tommi", password:"Secret1", password_confirmation:"Secret1"
-u3 = User.create username:"Juppi", password:"Secret1", password_confirmation:"Secret1"
+u1 = User.create username:"Pekka", password:"Secret1", password_confirmation:"Secret1", admin:false, iced:false
+u2 = User.create username:"Tommi", password:"Secret1", password_confirmation:"Secret1", admin:true, iced:false
+u3 = User.create username:"Juppi", password:"Secret1", password_confirmation:"Secret1", admin:false, iced:true
 
 Rating.create score:10, beer:beer1, user:u1
 Rating.create score:15, beer:beer2, user:u1
