@@ -11,10 +11,7 @@
       <tr>
         <td><%= link_to brewery.name, brewery %></td>
         <td><%= brewery.year %></td>
-        <% if current_user %>
-          <td><%= link_to'Edit', edit_brewery_path(brewery), class:"btn-sm btn-primary" %></td>
-          <td><%= link_to 'Destroy', brewery, method: :delete, data: { confirm: 'Are you sure?' }, class:"btn-sm btn-danger" %></td>
-        <% end %>
+        <td><%= edit_and_destroy_buttons(brewery) %></td>
       <tr>
     <% end %>
   </tbody>

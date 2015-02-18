@@ -45,7 +45,7 @@
         <tr> 
           <td><%= rating.to_s %></td> 
           <% if @user == current_user %>
-            <td><%= link_to 'delete', rating, method: :delete, data: { confirm: 'Are you sure?' } %></td> 
+            <td><%= link_to 'delete', rating, method: :delete, data: { confirm: 'Are you sure?' }, class:"btn-sm btn-danger" %></td> 
           <% end %>
         </tr>
       <% end %>
@@ -64,5 +64,5 @@
 </br></br>
 <% if @user == current_user %>
   <%= link_to 'Edit', edit_user_path(@user), class:"btn-sm btn-primary" %>
-  <%= link_to 'Destroy', @user, method: :delete, data: { confirm: 'Are you sure? This will erase your username from the database!' }, class:"btn-sm btn-primary" %>
+  <%= link_to 'Destroy', @user, method: :delete, data: { confirm: 'Are you sure? This will erase your username from the database!' }, class:"btn-sm btn-danger" %>
 <% end %>
