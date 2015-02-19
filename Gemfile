@@ -58,6 +58,7 @@ group :development, :test do
   gem 'spring'
   gem 'better_errors'
   gem 'sqlite3'
+  gem 'byebug'
   gem 'rspec-rails'
 end
 

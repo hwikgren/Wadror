@@ -11,9 +11,17 @@ class BreweriesController < ApplicationController
       when 'name' 
         @active_breweries = Brewery.active.order(:name)
         @retired_breweries = Brewery.retired.order(:name)
+        session[:brewery_order] = "name"
       when 'year'
-        @active_breweries = Brewery.active.order(:year)
-        @retired_breweries = Brewery.retired.order(:year)
+        if session[:brewery_order] == "year_down"
+          @active_breweries = Brewery.active.order(year: :desc)
+          @retired_breweries = Brewery.retired.order(year: :desc)
+          session[:brewery_order] = "year_up"
+        else
+          @active_breweries = Brewery.active.order(:year)
+          @retired_breweries = Brewery.retired.order(:year)
+          session[:brewery_order] = "year_down"
+        end
     end
   end
 
