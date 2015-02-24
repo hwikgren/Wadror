@@ -1,6 +1,6 @@
 class BreweriesController < ApplicationController
   before_action :set_brewery, only: [:show, :edit, :update, :destroy]
-  before_action :ensure_that_signed_in, except: [:index, :show]
+  before_action :ensure_that_signed_in, except: [:index, :show, :list, :nglist]
   before_action :ensure_that_admin, only: [:delete]
 
   # GET /breweries
@@ -23,6 +23,7 @@ class BreweriesController < ApplicationController
           session[:brewery_order] = "year_down"
         end
     end
+    @breweries = Brewery.all    
   end
 
   # GET /breweries/1
@@ -84,6 +85,12 @@ class BreweriesController < ApplicationController
     brewery.update_attribute :active, (not brewery.active)
     new_status = brewery.active? ? "active" : "retired"
     redirect_to :back, notice:"Brewry activity status changed to #{new_status}"
+  end
+
+  def brewerylist
+  end
+
+  def ngbreweries
   end
 
   private
