@@ -32,6 +32,38 @@ describe "Beerlist page" do
 
   it "shows one known beer", js:true do
     visit beerlist_path
+    find('table').find('tr:nth-child(2)')
+    save_and_open_page
     expect(page).to have_content "Nikolai"
+  end
+
+  it "shows beers in alphabetical order", js:true do
+    visit beerlist_path
+    row1 = find('table').find('tr:nth-child(2)')
+    row3 = find('table').find('tr:nth-child(4)')
+    save_and_open_page
+    expect(row1).to have_content "Fastenbier"
+    expect(row3).to have_content "Nikolai"
+  end
+
+  describe "when clicked order" do
+    it "by style it shows beers in the order of the styles", js:true do
+      visit beerlist_path
+      click_link('style')
+      row1 = find('table').find('tr:nth-child(2)')
+      row3 = find('table').find('tr:nth-child(4)')
+      save_and_open_page
+      expect(row1).to have_content "Lager"
+      expect(row3).to have_content "Leichte Weisse"
+    end
+    it "by brewery it shows beers in the order of the breweries", js:true do
+      visit beerlist_path
+      click_link('brewery')
+      row1 = find('table').find('tr:nth-child(2)')
+      row3 = find('table').find('tr:nth-child(4)')
+      save_and_open_page
+      expect(row1).to have_content "Ayinger"
+      expect(row3).to have_content "Fastenbier"
+    end
   end
 end
