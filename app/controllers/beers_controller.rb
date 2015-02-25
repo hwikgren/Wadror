@@ -9,9 +9,9 @@ class BeersController < ApplicationController
   def index
     order = params[:order] || 'name'
     @beers = case order
-      when 'name' then Beer.order(:name)
-      when 'style' then Beer.includes(:style).order('styles.name')
-      when 'brewery' then Beer.includes(:brewery).order('breweries.name')
+      when 'name' then Beer.includes(:style, :brewery).order(:name)
+      when 'style' then Beer.includes(:style, :brewery).order('styles.name')
+      when 'brewery' then Beer.includes(:brewery, :style).order('breweries.name')
     end
   end
 
