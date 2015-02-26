@@ -16,6 +16,7 @@
         <td><%= link_to user.username, user %></td>
         <td><%= user.beers.size %></td>
         <td><%= user.ratings.size %></td>
+        <td><%= user.favorite_beer %></td>
         <% if current_user && current_user.admin && user.iced %>
           <td><span class="badge">account frozen</span></td>
         <% end %>

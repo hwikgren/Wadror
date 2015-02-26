@@ -1,5 +1,7 @@
 <p id="notice"><%= notice %></p>
 
+<% cache @brewery do %>
+
 <h2>
   <%= @brewery.name %>
   <% unless @brewery.active %>
@@ -32,6 +34,8 @@
   <% end %>
 </p>
 <br />
+
+<% end %>
 
 <% if current_user %>
   <%= link_to "Change activity", toggle_activity_brewery_path(@brewery.id), method: :post, class:"btn-sm btn-primary" %>

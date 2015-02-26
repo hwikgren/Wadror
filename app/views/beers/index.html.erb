@@ -2,6 +2,8 @@
 
 <h2>Beers</h2>
 
+<% cache "beerlist-#{@order}", skip_digest: true do %>
+
 <table class="table table-striped table-condensed">
   <thead>
     <tr>
@@ -16,7 +18,6 @@
     <% @beers.each do |beer| %>
       <tr>
         <td><%= link_to beer.name, beer %></td>
-        <%# style = Style.find(beer.style_id) %>
         <td><%= link_to beer.style.name, beer.style %></td>
         <td><%= link_to beer.brewery.name, beer.brewery %></td>
         <td><%= edit_and_destroy_buttons(beer) %></td>
@@ -24,6 +25,8 @@
     <% end %>
   </tbody>
 </table>
+
+<% end %>
 
 <br>
 

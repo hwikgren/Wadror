@@ -2,20 +2,21 @@ class BreweriesController < ApplicationController
   before_action :set_brewery, only: [:show, :edit, :update, :destroy]
   before_action :ensure_that_signed_in, except: [:index, :show, :list, :nglist]
   before_action :ensure_that_admin, only: [:delete]
+  before_action :skip_if_cached, only: [:index]
+  before_action :expire_fragments, only: [:create, :update, :destroy]
 
   # GET /breweries
   # GET /breweries.json
   def index
-    order = params[:order] || 'name'
-    case order
+    case @order
       when 'name' 
-        @active_breweries = Brewery.active.order(:name)
-        @retired_breweries = Brewery.retired.order(:name)
+        @active_breweries = Brewery.active.order('lower(name)')
+        @retired_breweries = Brewery.retired.order('lower(name)')
         session[:brewery_order] = "name"
       when 'year'
         if session[:brewery_order] == "year_down"
-          @active_breweries = Brewery.active.order(year: :desc)
-          @retired_breweries = Brewery.retired.order(year: :desc)
+          @active_breweries = Brewery.active.order(:year).reverse
+          @retired_breweries = Brewery.retired.order(:year).reverse
           session[:brewery_order] = "year_up"
         else
           @active_breweries = Brewery.active.order(:year)
@@ -97,6 +98,18 @@ class BreweriesController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_brewery
       @brewery = Brewery.find(params[:id])
+    end
+
+    def skip_if_cached
+      @order = params[:order] || 'name'
+        if fragment_exist?("breweries-#{@order}")
+          return render :index 
+        end
+    end
+
+    def expire_fragments
+        ["breweries-name", "breweries-year"].each{ |f| expire_fragment(f) }
+        session[:brewery_order] = ""
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
