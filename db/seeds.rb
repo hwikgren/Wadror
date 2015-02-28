@@ -40,8 +40,8 @@ Rating.create score:21, beer:beer5, user:u3
 club1 = BeerClub.create name:"Vallilan hiivaveikot", founded:2005, city:"Helsinki"
 club2 = BeerClub.create name:"Rekolan olutseura", founded:2013, city:"Vantaa"
 
-Membership.create user:u1, beer_club:club1
-Membership.create user:u2, beer_club:club1
-Membership.create user:u2, beer_club:club2
+Membership.create user:u1, beer_club:club1, confirmed: true
+Membership.create user:u2, beer_club:club1, confirmed: false
+Membership.create user:u2, beer_club:club2, confirmed:true
 
 
