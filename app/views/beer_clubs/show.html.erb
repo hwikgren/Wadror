@@ -10,24 +10,40 @@
 
 <h4>Members</h4>  
   <table class="table table-striped table-condensed">
-    <% @beer_club.users.each do |user| %>
+    <% @users_confirmed.each do |user| %>
       <tr>
         <td><%= link_to user.username, user %></td>
       </tr>
     <% end %>
   </table>
-<br /><br />
+<br />
+
 
 <% if current_user %>
-  <% unless @beer_club.users.include?(current_user) %>
-    <%= form_for(@membership) do |f| %>
-      <%= f.hidden_field :beer_club_id %>
-      <%= f.submit value:"Join the club", class:"btn-sm btn-primary" %>
+  <% if @users_confirmed.include?(current_user) and @users_pending.size > 0 %>
+    <h4>Pending applications</h4>
+    <table class="table table-striped table-condensed">
+    <% @users_pending.each do |user| %>
+      <tr>
+        <td><%= link_to user.username, user %></td>
+        <td><%= link_to 'Confirm', confirm_application_membership_path(beer_club_id: @beer_club.id, user_id: user.id), method: :post, class:"btn-sm btn-primary" %>
+      </tr>
     <% end %>
-  <% else %>
-    <%= form_for(@membership, method: "delete") do |f| %>
-      <%= f.hidden_field :beer_club_id %>
-      <%= f.submit value: "End the membership", class:"btn-sm btn-primary" %>
+  </table>
+<br /><br />
+  <% end %>
+  <% unless @users_pending.include?(current_user) %>
+    <% if @users_confirmed.include?(current_user) %>
+      <%= form_for(@membership, method: "delete") do |f| %>
+        <%= f.hidden_field :beer_club_id %>
+        <%= f.submit value: "End the membership", class:"btn-sm btn-primary" %>
+      <% end %>
+    <% end %>
+    <% unless @users_confirmed.include?(current_user) %>
+      <%= form_for(@membership) do |f| %>
+        <%= f.hidden_field :beer_club_id %>
+          <%= f.submit value:"Join the club", class:"btn-sm btn-primary" %>
+      <% end %>
     <% end %>
   <% end %>
 <br /><br />

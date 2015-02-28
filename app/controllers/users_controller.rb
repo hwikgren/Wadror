@@ -11,6 +11,8 @@ class UsersController < ApplicationController
   # GET /users/1
   # GET /users/1.json
   def show
+    @clubs_confirmed = @user.memberships.where(confirmed: true).pluck(:beer_club_id).map{ |c| BeerClub.find(c) }
+    @clubs_pending = @user.memberships.where(confirmed: false).pluck(:beer_club_id).map{ |c| BeerClub.find(c) }
   end
 
   # GET /users/new

@@ -29,6 +29,7 @@ class MembershipsController < ApplicationController
     @membership.user_id = current_user.id
     respond_to do |format|
       if @membership.save
+        @membership.update_attribute(:confirmed, false)
         format.html { redirect_to @membership.beer_club, notice: "#{current_user.username}, welcome to the club!" }
         format.json { render :show, status: :created, location: @membership }
       else
@@ -64,6 +65,12 @@ class MembershipsController < ApplicationController
         redirect_to back
       end
     end
+  end
+
+  def confirm_application
+    membership = Membership.where(beer_club_id: params[:beer_club_id], user_id: params[:user_id]).take
+    membership.update_attribute(:confirmed, true)
+    redirect_to :back
   end
 
   private

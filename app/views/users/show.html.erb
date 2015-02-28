@@ -7,10 +7,32 @@
   <% end %>
 </h2>
 
-<% unless @user.beer_clubs.count == 0 %>
-  member of
+<% unless @user.favorite_style.nil? %>
+  </br>
+  <b>Favorite beer style</b> is <%= @user.favorite_style %>.
+<% end %>
+
+<% unless @user.favorite_brewery.nil? %>
+  </br></br>
+  <b>Favorite brewery</b> is <%= @user.favorite_brewery %>.
+<% end %>
+</br><br />
+
+<h4>Memberships</h4>
+<% unless @clubs_confirmed.count == 0 %>
+  <b>Member of</b>
   <ul style="list-style: none;">
-    <% @user.beer_clubs.each do |club| %>
+    <% @clubs_confirmed.each do |club| %>
+      <li>
+        <%= link_to club.name, club %>
+      </li>
+    <% end %>
+  </ul>
+<% end %>
+<% unless @clubs_pending.count == 0 %>
+  <b>Pending application in</b>
+  <ul style="list-style: none;">
+    <% @clubs_pending.each do |club| %>
       <li>
         <%= link_to club.name, club %>
       </li>
@@ -18,24 +40,14 @@
   </ul>
 <% end %>
 
-<% unless @user.favorite_style.nil? %>
-  </br>
-  Favorite beer style is <%= @user.favorite_style %>.
-<% end %>
-
-<% unless @user.favorite_brewery.nil? %>
-  </br></br>
-  Favorite brewery is <%= @user.favorite_brewery %>.
-<% end %>
-
-</br></br>  
+</br>  
+<h4>Ratings</h4>
 <p>
-  Has made <%= pluralize(@user.ratings.count, 'rating', 'ratings') %>
+  Has made <b><%= pluralize(@user.ratings.count, 'rating', 'ratings') %></b>
 </p>
 
 <% unless @user.ratings.count == 0 %>
-  The ratings have the average <%= round(@user.average_rating) %> </br></br>
-  <h4>Ratings</h4>
+  The ratings have the <b>average <%= round(@user.average_rating) %></b> </br></br>
   <table class="table table-striped table-condensed">
     <thead>
       <th>Beer Score</th>
