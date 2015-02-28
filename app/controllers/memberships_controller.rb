@@ -30,7 +30,7 @@ class MembershipsController < ApplicationController
     respond_to do |format|
       if @membership.save
         @membership.update_attribute(:confirmed, false)
-        format.html { redirect_to @membership.beer_club, notice: "#{current_user.username}, welcome to the club!" }
+        format.html { redirect_to @membership.beer_club, notice: "#{current_user.username}, your application has been sent!" }
         format.json { render :show, status: :created, location: @membership }
       else
         format.html { render :new }
